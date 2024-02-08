@@ -14,25 +14,27 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Supper Admin
+        // Super Admin
         User::factory()->create([
-            'name' => 'Supper Admin',
+            'name' => 'Super Admin',
             'email' => 'admin@gmail.com',
-            'role' => Role::ADMIN
+            'role' => Role::ADMIN,
+            'password' => bcrypt('123456'),
         ]);
 
         // Company
         User::factory()->create([
             'name' => 'company',
             'email' => 'company@gmail.com',
-            'role' => Role::COMPANY
+            'role' => Role::COMPANY,
+            'password' => bcrypt('123456'),
         ]);
 
         // Candidates
         User::factory()->create([
             'name' => 'candidates',
             'email' => 'candidates@gmail.com',
-            'role' => Role::CANDIDATES
+            'password' => bcrypt('123456'),
         ]);
     }
 }
