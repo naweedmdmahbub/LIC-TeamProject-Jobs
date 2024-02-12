@@ -2,27 +2,23 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <form style="width: 300px" method="POST" action="{{ route('login') }}">
         @csrf
 
-      <div>
-        <label for="">Role</label>
-        <select
-        class="px-4 py-2 border focus:ring-gray-500 focus:rgb(59 130 246 / 0.5) w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-        id="select-category"
-        name="role"
-        autocomplete="off"
-    >
-        <option value="">-Select Your Role-</option>
-        @foreach($roles as $role)
-            <option value="{{ $role }}"> {{ $role }}</option>
-        @endforeach
-    </select>
-    @error('role')
-        <p class="text-red-700">{{ $message }}</p>
-    @enderror
- </div>
-<br>
+        <div>
+            <label for="">Role</label>
+            <select
+            class="px-4 py-2 border focus:ring-gray-500 focus:rgb(59 130 246 / 0.5) w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+            name="role"
+            autocomplete="off" id="role_select">
+            @foreach($roles as $role)
+                <option value="{{ $role }}"> {{ $role }}</option>
+            @endforeach
+        </select>
+        @error('role')
+            <p class="text-red-700">{{ $message }}</p>
+        @enderror
+     </div>
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -61,5 +57,5 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
-    </form>
+</form>
 </x-guest-layout>
