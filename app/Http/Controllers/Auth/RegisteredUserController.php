@@ -9,12 +9,16 @@ use Illuminate\Http\Request;
 use App\Models\CandidateInfo;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
+use App\Jobs\AdminApproveSendMail;
+use App\Jobs\ProcessPodcast;
+use App\Mail\AdminApproveMail;
 use App\Models\CompanyInfo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Mail;
 
 class RegisteredUserController extends Controller
 {
@@ -81,10 +85,11 @@ class RegisteredUserController extends Controller
                 'user_id'    => $user->id
             ]);
         }
-        
+
+        AdminApproveSendMail::dispatch($user);
         event(new Registered($user));
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('login');
     }
 }

@@ -72,7 +72,7 @@
                 <!-- Experience -->
                 <div class="mt-4">
                     <x-input-label for="website" :value="__('Website')" />
-                    <x-text-input id="website" class="block mt-1 w-full" type="text" name="website" :value="old('website')" placeholder="Enter Your Website"/>
+                    <x-text-input id="website" class="block mt-1 w-full" type="url" name="website" :value="old('website')" placeholder="Enter Your Website"/>
                     <x-input-error :messages="$errors->get('website')" class="mt-2" />
                 </div>
                 <!-- Address -->
