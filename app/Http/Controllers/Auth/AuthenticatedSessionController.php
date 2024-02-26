@@ -20,7 +20,7 @@ class AuthenticatedSessionController extends Controller
     {
         $roles = [
             Role::ADMIN,
-            Role::CANDIDATES,
+            Role::CANDIDATE,
             Role::COMPANY,
         ];
         return view('auth.login',compact('roles'));

@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\AdminApproveSendMail;
 use App\Jobs\ProcessPodcast;
 use App\Mail\AdminApproveMail;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\CompanyInfo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -28,11 +29,11 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
        $roles = [
-           Role::CANDIDATES,
+           Role::CANDIDATE,
            Role::COMPANY
        ];
 
-        return view('auth.register',compact('roles'));
+        return view('auth.register', compact('roles'));
     }
 
     /**
@@ -40,30 +41,17 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(RegisterRequest $request): RedirectResponse
     {
-            $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-                'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            ]);
-
-            $user = User::create([
-                'role' => $request->role,
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
+        $user = User::create([
+            'role' => $request->role,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
         if($request->role === 'candidate'){
-            $request->validate([
-                'experience' => ['required', 'string', 'max:255'],
-                'address' => ['required', 'string', 'max:255'],
-                'designation' => ['required', 'string', 'max:255'],
-                'skill' => ['required', 'string', 'max:255'],
-            ]);
-
-          $candidates = CandidateInfo::create([
+            CandidateInfo::create([
                 'experience' => $request->experience,
                 'designation' => $request->designation,
                 'address'    => $request->address,
@@ -73,12 +61,7 @@ class RegisteredUserController extends Controller
         }
 
         if($request->role === 'company'){
-            $request->validate([
-                'website' => ['required', 'string', 'max:255'],
-                'location' => ['required', 'string', 'max:255'],
-                'contact' => ['required', 'string', 'max:255'],
-            ]);
-          $company = CompanyInfo::create([
+            CompanyInfo::create([
                 'website'   => $request->website,
                 'contact'   => $request->contact,
                 'location'  => $request->location,
@@ -88,8 +71,6 @@ class RegisteredUserController extends Controller
 
         AdminApproveSendMail::dispatch($user);
         event(new Registered($user));
-        Auth::login($user);
-
         return redirect()->route('login');
     }
 }
