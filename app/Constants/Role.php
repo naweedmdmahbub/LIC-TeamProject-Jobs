@@ -2,8 +2,11 @@
 
 namespace App\Constants;
 
-class Role {
+class Role
+{
     public const ADMIN = 'admin';
+
     public const CANDIDATES = 'candidate';
+
     public const COMPANY = 'company';
 }

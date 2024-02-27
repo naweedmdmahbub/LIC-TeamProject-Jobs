@@ -2,10 +2,8 @@
 
 namespace App\Mail;
 
-use App\Jobs\ProcessPodcast;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
@@ -32,7 +30,7 @@ class AdminApproveMail extends Mailable
         return new Envelope(
             from: new Address($this->user->email),
             replyTo: [
-                new Address ( $this->user->role === 'admin' )
+                new Address($this->user->role === 'admin'),
             ],
             subject: 'Approve',
         );

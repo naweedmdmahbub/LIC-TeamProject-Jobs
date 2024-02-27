@@ -20,3 +20,11 @@
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+
+@section('approve-style')
+<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/brands.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/solid.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+@show
