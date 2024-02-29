@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -24,7 +23,8 @@ class User extends Authenticatable implements ShouldQueue
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'status',
     ];
 
     /**
@@ -47,3 +47,32 @@ class User extends Authenticatable implements ShouldQueue
         'password' => 'hashed',
     ];
 }
+
+// hjklasdf
+// use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Auth;
+
+// class LoginController extends Controller
+// {
+//     // other methods...
+
+//     public function login(Request $request)
+//     {
+//         $credentials = $request->only('email', 'password');
+
+//         if (Auth::attempt($credentials)) {
+//             $user = Auth::user();
+
+//             if ($user->status === User::STATUS_APPROVED) {
+//                 // User is approved, proceed with login
+//                 return redirect()->intended('/dashboard');
+//             } elseif ($user->status === User::STATUS_DRAFT) {
+//                 // User is in draft status, do not allow login
+//                 Auth::logout();
+//                 return redirect()->route('login')->with('error', 'Your account is not approved yet.');
+//             }
+//         }
+
+//         return redirect()->route('login')->with('error', 'Invalid credentials');
+//     }
+// }

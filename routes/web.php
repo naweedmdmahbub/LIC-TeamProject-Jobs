@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminMailApproveController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
@@ -12,9 +13,11 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [HomeController::class, 'home'])->middleware(['auth', 'verified'])->name('dashboard');
 
-
 Route::get('/my-dashboard', function () {
     return view('index');
 })->name('myDashboard');
 
 Route::get('/jobs', [JobController::class, 'index'])->middleware(['auth', 'verified'])->name('jobs');
+Route::get('/approve/mail', [AdminMailApproveController::class, 'index'])->middleware(['auth', 'verified'])->name('approve.mail');
+
+Route::get('/user/draft/status/{draft}', [AdminMailApproveController::class, 'userDraftStatus'])->middleware(['auth', 'verified'])->name('user.draft');

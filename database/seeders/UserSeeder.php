@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Constants\Role;
+use App\Constants\Status;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'Super Admin',
             'email' => 'admin@gmail.com',
             'role' => Role::ADMIN,
+            'status' => Status::APPROVED,
             'password' => bcrypt('123456'),
         ]);
 
@@ -27,6 +28,7 @@ class UserSeeder extends Seeder
             'name' => 'company',
             'email' => 'company@gmail.com',
             'role' => Role::COMPANY,
+            'status' => Status::APPROVED,
             'password' => bcrypt('123456'),
         ]);
 
@@ -34,6 +36,7 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'name' => 'candidates',
             'email' => 'candidates@gmail.com',
+            'status' => Status::APPROVED,
             'password' => bcrypt('123456'),
         ]);
     }

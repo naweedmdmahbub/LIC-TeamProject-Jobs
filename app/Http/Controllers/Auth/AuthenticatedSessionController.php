@@ -23,7 +23,8 @@ class AuthenticatedSessionController extends Controller
             Role::CANDIDATE,
             Role::COMPANY,
         ];
-        return view('auth.login',compact('roles'));
+
+        return view('auth.login', compact('roles'));
     }
 
     /**

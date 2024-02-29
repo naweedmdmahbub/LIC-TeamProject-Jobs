@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
 use App\Constants\Role;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use App\Models\CandidateInfo;
-use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
 use App\Jobs\AdminApproveSendMail;
 use App\Jobs\ProcessPodcast;
@@ -54,9 +49,9 @@ class RegisteredUserController extends Controller
             CandidateInfo::create([
                 'experience' => $request->experience,
                 'designation' => $request->designation,
-                'address'    => $request->address,
-                'skill'      => $request->skill,
-                'user_id'    => $user->id
+                'address' => $request->address,
+                'skill' => $request->skill,
+                'user_id' => $user->id,
             ]);
         }
 
@@ -67,10 +62,9 @@ class RegisteredUserController extends Controller
                 'location'  => $request->location,
                 'user_id'    => $user->id
             ]);
+            AdminApproveSendMail::dispatch($user);
+            event(new Registered($user));
         }
-
-        AdminApproveSendMail::dispatch($user);
-        event(new Registered($user));
         return redirect()->route('login');
     }
 }
