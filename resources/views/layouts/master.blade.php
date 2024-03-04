@@ -29,7 +29,17 @@
           @include('layouts.navbar')
 
           @include('layouts.sidebar')
-          @yield('content')
+          
+          <!-- Content Wrapper. Contains page content -->
+          <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+              <div class="container-fluid">
+                @yield('content')
+              </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+          </div>
           @include('layouts.footer')
 
         </div>

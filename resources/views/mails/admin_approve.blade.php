@@ -1,12 +1,13 @@
 <x-mail::message>
-# Nwe User
+    # New Company Registration Request:
 
-{{ $user->name }}!
+    name: {{ $user->name }}
+    address: {{ $user->address }}
 
-<x-mail::button url="https://laravel.com">
-Approve This User
-</x-mail::button>
+    <x-mail::button url="https://laravel.com">
+        Approve This User
+    </x-mail::button>
 
-Thanks,<br>
-{{ config('app.name') }}
+    Thanks,<br>
+    {{ config('app.name') }}
 </x-mail::message>

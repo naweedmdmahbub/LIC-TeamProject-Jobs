@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -46,6 +47,13 @@ class User extends Authenticatable implements ShouldQueue
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function companyInfo(){
+        return $this->hasOne(CompanyInfo::class);
+    }
+    public function candidateInfo(){
+        return $this->hasOne(CandidateInfo::class);
+    }
 }
 
 // hjklasdf

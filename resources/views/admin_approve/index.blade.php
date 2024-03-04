@@ -32,10 +32,12 @@
                 <td>{{ $user->role }}</td>
                 <td>
                     @if ($user->status === 'draft')
-                    <h4><a href="{{ route('user.draft', $user->id) }}"><span class="badge bg-danger">Draft</span></a></h4>
+                        <h4>
+                            <a href="{{ route('user.draft', $user->id) }}"><span class="badge bg-danger">Draft</span></a>
+                        </h4>
                     @endif
                     @if ($user->status === 'approved')
-                    <h4><a href=""><span class="badge bg-success">Approve</span></a></h4>
+                        <h4><a href=""><span class="badge bg-success">Approve</span></a></h4>
                      @endif
                 </td>
 

@@ -37,7 +37,7 @@ class RegisterRequest extends FormRequest
             ];
         }else{
             $rules += [
-                'website' => ['required', 'string', 'max:255'],
+                'website' => ['nullable', 'string', 'max:255'],
                 'location' => ['required', 'string', 'max:255'],
                 'contact' => ['required', 'string', 'max:255'],
             ];

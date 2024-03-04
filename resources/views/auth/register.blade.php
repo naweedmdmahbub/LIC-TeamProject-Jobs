@@ -9,7 +9,9 @@
                 name="role"
                 autocomplete="off" id="role_select">
                 @foreach($roles as $role)
-                    <option value="{{ $role }}"> {{ $role }}</option>
+                    <option value="{{ $role }}" {{ old('role') == $role ? 'selected' : '' }}>
+                        {{ $role }}
+                    </option>
                 @endforeach
             </select>
             @error('role')
@@ -129,15 +131,27 @@
     </form>
 
     <script>
-        $("#role_select").on("change",function(){
-            const type = $(this).val();
-            if(type === 'candidate'){
-                $("#candidates_info").show();
-                $("#company_info").hide();
-            }else if(type === 'company'){
+        $(document).ready(function() {
+            // Check the initial value of 'role' when the page loads
+            const initialRole = $("#role_select").val();
+            console.log('initialRole', initialRole);
+            if (initialRole === 'company') {
+                console.log('2', initialRole);
                 $("#company_info").show();
                 $("#candidates_info").hide();
             }
+    
+            // Add change event listener to role select
+            $("#role_select").on("change", function() {
+                const type = $(this).val();
+                if (type === 'candidate') {
+                    $("#candidates_info").show();
+                    $("#company_info").hide();
+                } else if (type === 'company') {
+                    $("#company_info").show();
+                    $("#candidates_info").hide();
+                }
+            });
         });
     </script>
 </x-guest-layout>
