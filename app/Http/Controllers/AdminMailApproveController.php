@@ -20,30 +20,34 @@ class AdminMailApproveController extends Controller
     /**
      * User Draft With Change Status
      */
-    public function userDraftStatus($draft)
+    public function userDraftStatus($user_id)
     {
-        $draft = User::findOrFail($draft);
-        if ($draft->status === 'draft') {
+        $user = User::findOrFail($user_id);
+        if ($user->status === 'draft') {
             $status = Status::APPROVED;
-            $draft->update([
+            $user->update([
                 'status' => $status,
             ]);
 
             return back();
         }
     }
+
     /**
      * User Approve With Change Status
      */
+    public function approveCompanyFromEmail($user_id)
+    {
+        
+        $user = User::findOrFail($user_id);
+        if ($user->status === 'draft') {
+            $status = Status::APPROVED;
+            $user->update([
+                'status' => $status,
+            ]);
 
-    //  public function userApproveStatus($approve)
-    //  {
-    //         $approve = User::findOrFail($approve);
-    //         if($approve->status){
-    //             $approve->update([
-    //                 'status' => Status::APPROVED
-    //             ]);
-    //             return back();
-    //         }
-    //  }
+            return redirect('/companies');
+        }
+    }
+    
 }

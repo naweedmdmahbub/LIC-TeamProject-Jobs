@@ -32,7 +32,7 @@ class AdminApproveMail extends Mailable
             replyTo: [
                 new Address($this->user->role === 'admin'),
             ],
-            subject: 'Approve',
+            subject: 'Approve Company',
         );
     }
 
@@ -42,7 +42,7 @@ class AdminApproveMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mails.admin_approve',
+            markdown: 'mails.approve_company',
             with: [
                 'user' => $this->user,
             ],

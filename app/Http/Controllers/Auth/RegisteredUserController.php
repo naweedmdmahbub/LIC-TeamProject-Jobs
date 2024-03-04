@@ -11,11 +11,9 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\CandidateInfo;
 use App\Models\CompanyInfo;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 

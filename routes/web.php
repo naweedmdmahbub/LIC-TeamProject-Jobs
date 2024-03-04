@@ -22,6 +22,9 @@ Route::get('/jobs', [JobController::class, 'index'])->middleware(['auth', 'verif
 Route::get('/approve/mail', [AdminMailApproveController::class, 'index'])->middleware(['auth', 'verified'])->name('approve.mail');
 
 Route::get('/user/draft/status/{draft}', [AdminMailApproveController::class, 'userDraftStatus'])->middleware(['auth', 'verified'])->name('user.draft');
+Route::get('/approve-company-from-email/{user_id}', [AdminMailApproveController::class, 'approveCompanyFromEmail'])
+    // ->middleware(['companyApproval.key'])
+    ->name('approve-company-from-email');
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/companies', [CompanyController::class, 'index'])->name('companies');

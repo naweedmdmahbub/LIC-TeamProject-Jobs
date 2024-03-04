@@ -1,8 +1,5 @@
 <x-mail::message>
-    # New Company Registration Request:
-
-    name: {{ $user->name }}
-    address: {{ $user->address }}
+    # New Company Registration Request
 
     <x-mail::button url="https://laravel.com">
         Approve This User
