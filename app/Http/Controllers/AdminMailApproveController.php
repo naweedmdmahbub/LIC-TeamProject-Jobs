@@ -21,7 +21,7 @@ class AdminMailApproveController extends Controller
      * User Draft With Change Status
      */
     public function userDraftStatus($user_id)
-    {
+    {        
         $user = User::findOrFail($user_id);
         if ($user->status === 'draft') {
             $status = Status::APPROVED;
