@@ -25,11 +25,11 @@ class JobPolicy
         $total_jobs = Job::where('user_id', $user->id)
                         ->where('status', '=', 'active')
                         ->get()->count();
-        return $user->role === 'company' && $total_jobs <3;
+        return ($user->role === 'company' && $total_jobs <3) || $user->role === 'admin';
     }
     public function store(User $user): bool
     {
-        return $user->role === 'company';
+        return $user->role === 'company' || $user->role === 'admin';
     }
     
     /**
@@ -47,7 +47,7 @@ class JobPolicy
      */
     public function update(User $user, Job $job): bool
     {
-        return $user->role === 'company' && $user->id === $job->user_id;
+        return ($user->role === 'company' && $user->id === $job->user_id) || $user->role === 'admin';
     }
 
     /**
@@ -55,7 +55,7 @@ class JobPolicy
      */
     public function delete(User $user, Job $job): bool
     {
-        return ($user->role === 'company' && $user->id === $job->user_id);
+        return ($user->role === 'company' && $user->id === $job->user_id) || $user->role === 'admin';
     }
 
     // /**
