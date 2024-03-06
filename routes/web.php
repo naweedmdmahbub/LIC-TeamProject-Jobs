@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('guest');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->middleware('guest');
 
 Route::get('/dashboard', [HomeController::class, 'home'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [HomeController::class, 'welcome'])->middleware('guest')->name('welcome');
 
 Route::get('/my-dashboard', function () {
     return view('index');
@@ -36,8 +37,3 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/jobs/delete/{id}', [JobController::class, 'delete'] )->name('jobs.delete');
     Route::resource('tags', TagController::class);
 });
-// Route::group(['middleware' => ['auth']], function(){
-//     Route::get('/tags/create', [TagController::class, 'create'])->name('tags.create');
-//     Route::get('/tags', [TagController::class, 'index'])->name('tags.index');
-//     Route::get('/tags/{tag}', [TagController::class, 'create'])->name('tags.edit');
-// });

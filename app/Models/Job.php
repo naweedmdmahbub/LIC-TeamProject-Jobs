@@ -23,10 +23,10 @@ class Job extends Model
         'attempts'
     ];
     public function company(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
     public function candidates(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'user_id', 'id');
     }
     public function tags(){
         return $this->belongsToMany(Tag::class);

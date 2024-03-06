@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('website')->nullable();
             $table->string('title')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status')->nullable()->default('active');
             $table->integer('salary_min')->nullable();
             $table->integer('salary_max')->nullable();
             $table->string('link')->nullable();

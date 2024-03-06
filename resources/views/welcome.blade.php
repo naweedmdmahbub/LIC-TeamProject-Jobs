@@ -15,32 +15,79 @@
 	<link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
 	<title>LIC Team Project</title>
       <!-- Styles -->
+	@vite(['resources/css/app.css', 'resources/js/app.js'])
+	@include('layouts.styles')
+	@include('layouts.scripts')
 
 </head>
 
 <body class="bg-lock-screen">
 	<!-- wrapper -->
 	<div class="wrapper">
-		<div class="authentication-lock-screen d-flex align-items-center justify-content-center">
-			<div class="card shadow-none bg-transparent">
-				<div class="card-body p-md-5 text-center">
-					<h5 class="text-white">@php
-                        echo "Today".' - '.date("Y-m-d");
-                    @endphp</h5>
-                    <h2 class="text-white">@php
-                        date_default_timezone_set('Asia/Dhaka');
-                         $date = new DateTime('now');
-                       echo $date->format('H:i:s a')
-                    @endphp</h2>
-					<div class="">
-						<img src="{{ asset('assets/images/user.png') }}" class="mt-5" width="120" alt="" />
-					</div>
-					<p class="mt-2 text-white">wellcome</p>
-                        <div>
-                            <a class="text-white fs-5 btn btn-primary mx-1" href="{{ route('register') }}">Register</a>
+		<div class="authentication-lock-screen d-flex align-items-center justify-content-center row">
+			<div class="col-7">
+				<div class="card-header">
+					<h4 class="text-green-100">Available Jobs</h4>
+				</div>
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered">
+                        <thead>
+                            <tr class="bg-cyan-950 text-green-100">
+                                <th>Company</th>
+                                <th>Title</th>
+                                <th>Post</th>
+                                <th>Status</th>
+                                <th>Salary</th>
+                                <th>Vacancy</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($jobs  as $job)
+                                <tr class="bg-gray-800 text-green-200">
+                                    <td>{{ $job->company->name }}</td>
+                                    <td>{{ $job->title }}</td>
+                                    <td>{{ $job->post }}</td>
+                                    @if ($job->status === 'approved')
+                                        <td class="text-success">{{ $job->status }}</td>
+                                    @else
+                                        <td class="text-danger">{{ $job->status }}</td>
+                                    @endif
+                                    <td>{{ $job->salary_min }} - {{ $job->salary_max }}</td>
+                                    <td>{{ $job->vacancy }}</td>
+                                    <td>
+										<a href="{{$job->link}}" class="btn btn-primary">Apply</a>
+                                    </td>
+                                </tr>
+                        @endforeach
+                        </tbody>
 
-                            <a class="text-white fs-5 btn btn-primary" href="{{ route('login') }}">Login</a>
-                        </div>
+                    </table>
+                </div>
+
+			</div>
+			<div class="col-5">
+				<div class="card shadow-none bg-transparent">
+					<div class="card-body p-md-5 text-center">
+						<h5 class="text-white">@php
+							echo "Today".' - '.date("Y-m-d");
+						@endphp</h5>
+						<h2 class="text-white">
+							@php
+								date_default_timezone_set('Asia/Dhaka');
+								$date = new DateTime('now');
+								echo $date->format('H:i:s a')
+							@endphp
+						</h2>
+						<div class="">
+							<img src="{{ asset('assets/images/user.png') }}" class="mt-5" width="120" alt="" />
+						</div>
+						<p class="mt-2 text-white">Welcome</p>
+						<div>
+							<a class="text-white fs-5 btn btn-primary mx-1" href="{{ route('register') }}">Register</a>
+							<a class="text-white fs-5 btn btn-primary" href="{{ route('login') }}">Login</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

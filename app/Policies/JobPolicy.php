@@ -22,7 +22,10 @@ class JobPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === 'company';
+        $total_jobs = Job::where('user_id', $user->id)
+                        ->where('status', '=', 'active')
+                        ->get()->count();
+        return $user->role === 'company' && $total_jobs <3;
     }
     public function store(User $user): bool
     {
