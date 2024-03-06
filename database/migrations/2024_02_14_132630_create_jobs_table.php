@@ -13,12 +13,19 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('queue')->index();
-            $table->longText('payload');
-            $table->unsignedTinyInteger('attempts');
-            $table->unsignedInteger('reserved_at')->nullable();
-            $table->unsignedInteger('available_at');
-            $table->unsignedInteger('created_at');
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('ends_at')->nullable();
+            $table->string('post')->nullable();
+            $table->text('description')->nullable();
+            $table->string('website')->nullable();
+            $table->string('title')->nullable();
+            $table->string('status')->nullable();
+            $table->integer('salary_min')->nullable();
+            $table->integer('salary_max')->nullable();
+            $table->string('link')->nullable();
+            $table->integer('vacancy')->nullable();
+            $table->integer('attempts')->nullable();
+            $table->timestamps();
         });
     }
 
