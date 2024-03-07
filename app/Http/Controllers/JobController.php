@@ -8,7 +8,6 @@ use App\Models\Tag;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Toastr;
-use Illuminate\Http\Request;
 
 class JobController extends Controller
 {

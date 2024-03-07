@@ -23,9 +23,43 @@
 
 <body class="bg-lock-screen">
 	<!-- wrapper -->
+
 	<div class="wrapper">
 		<div class="authentication-lock-screen d-flex align-items-center justify-content-center row">
 			<div class="col-7">
+				
+				<div class="card">
+					<div class="card-body">
+						<form method="GET" action="{{ route('welcome') }}" class="row">
+							<div class="form-group col-3">
+								<label for="tags">Tags:</label>
+								<select name="tags[]" class="form-control select2" multiple="multiple">
+									@foreach($tags as $tag)
+										<option value="{{ $tag->id }}">{{ $tag->name }}</option>
+									@endforeach
+								</select>
+							</div>
+							
+							<div class="form-group col-6">
+								<label for="salary">Salary Range:</label>
+								<div class="input-group">
+									<input type="number" name="salary_min" class="form-control" placeholder="Min Salary">
+									<div class="input-group-prepend input-group-append">
+										<span class="input-group-text">to</span>
+									</div>
+									<input type="number" name="salary_max" class="form-control" placeholder="Max Salary">
+								</div>
+							</div>
+							
+							<div class="form-group col-3">
+								<label for="location">Location:</label>
+								<input type="text" name="location" class="form-control" placeholder="Enter location">
+							</div>
+							
+							<button type="submit" class="btn btn-primary">Filter</button>
+						</form>
+					</div>
+				</div>
 				<div class="card-header">
 					<h4 class="text-green-100">Available Jobs</h4>
 				</div>
@@ -36,7 +70,6 @@
                                 <th>Company</th>
                                 <th>Title</th>
                                 <th>Post</th>
-                                <th>Status</th>
                                 <th>Salary</th>
                                 <th>Vacancy</th>
                                 <th>Actions</th>
@@ -48,7 +81,6 @@
                                     <td>{{ $job->company->name }}</td>
                                     <td>{{ $job->title }}</td>
                                     <td>{{ $job->post }}</td>
-									<td class="text-success">{{ $job->status }}</td>
                                     <td>{{ $job->salary_min }} - {{ $job->salary_max }}</td>
                                     <td>{{ $job->vacancy }}</td>
                                     <td>
@@ -93,4 +125,21 @@
 </html>
 
 
+<script>
+    $(function() {
+        $('input[name="ends_at"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            locale: {
+                format: 'YYYY-MM-DD'
+            }
+        });
+        $('.select2').select2()
+    });
+</script>
+<style>
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: darkcyan;
+    }
+</style>
 
