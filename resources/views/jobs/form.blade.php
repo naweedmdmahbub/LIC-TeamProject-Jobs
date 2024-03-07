@@ -54,6 +54,15 @@
                 @if (Route::currentRouteName() == 'jobs.show') readonly @endif>
         </div>
     </div>
+    <div class="form-group row m-1">
+        <label for="experience" class="col-sm-2 mt-1 form-label">Experience</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="experience" placeholder="Experience"
+                {{-- value="@if($job->experience){{ $job->experience }}@endif" --}}
+                value="{{ old('experience', $job->experience ?? '') }}"
+                @if (Route::currentRouteName() == 'jobs.show') readonly @endif>
+        </div>
+    </div>
 
     <div class="form-group row m-1">
         <label for="link" class="col-sm-2 mt-1 form-label">Link</label>
@@ -83,7 +92,7 @@
                 style="width: 100%;">
                 @if(Route::currentRouteName() == 'jobs.edit')
                     @foreach($tags as $tag)
-                        <option value="{{ $tag }}" @if(in_array($tag, $selectedTags)) selected @endif>{{ $tag }}</option>
+                        <option value="{{ $tag }}" @if(in_array($tag, $selectedTags)) selected @endif>{{ $tag->name }}</option>
                     @endforeach
                 @elseif(Route::currentRouteName() == 'jobs.show')
                     @foreach($selectedTags as $tag)

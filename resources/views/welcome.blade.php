@@ -62,15 +62,17 @@
 				</div>
 				<div class="card-header">
 					<h4 class="text-green-100">Available Jobs</h4>
-				</div>
+				</div>s
                 <div class="card-body">
                     <table id="example1" class="table table-bordered">
                         <thead>
                             <tr class="bg-cyan-950 text-green-100">
                                 <th>Company</th>
+                                <th>Location</th>
                                 <th>Title</th>
                                 <th>Post</th>
                                 <th>Salary</th>
+                                <th>Experience</th>
                                 <th>Vacancy</th>
                                 <th>Actions</th>
                             </tr>
@@ -79,9 +81,11 @@
                             @foreach($jobs  as $job)
                                 <tr class="bg-gray-800 text-green-200">
                                     <td>{{ $job->company->name }}</td>
+                                    <td>{{ $job->company->companyInfo->location }}</td>
                                     <td>{{ $job->title }}</td>
                                     <td>{{ $job->post }}</td>
                                     <td>{{ $job->salary_min }} - {{ $job->salary_max }}</td>
+                                    <td>{{ $job->experience }} years</td>
                                     <td>{{ $job->vacancy }}</td>
                                     <td>
 										<a href="{{$job->link}}" class="btn btn-primary">Apply</a>

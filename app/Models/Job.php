@@ -20,7 +20,8 @@ class Job extends Model
         'salary_max',
         'link',
         'vacancy',
-        'attempts'
+        'attempts',
+        'experience',
     ];
     public function company(){
         return $this->belongsTo(User::class, 'user_id', 'id');
