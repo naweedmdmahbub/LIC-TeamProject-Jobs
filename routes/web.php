@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminMailApproveController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\RSSFeedController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,3 +38,5 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/jobs/delete/{id}', [JobController::class, 'delete'] )->name('jobs.delete');
     Route::resource('tags', TagController::class);
 });
+
+Route::get('feed', [RSSFeedController::class, 'index']);

@@ -47,7 +47,7 @@
                                     <td>{{ $job->title }}</td>
                                     <td>{{ $job->post }}</td>
                                     <td>{{ $job->description }}</td>
-                                    @if ($job->status === 'approved')
+                                    @if ($job->status === 'active')
                                         <td class="text-success">{{ $job->status }}</td>
                                     @else
                                         <td class="text-danger">{{ $job->status }}</td>

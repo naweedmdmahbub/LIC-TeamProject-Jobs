@@ -11,11 +11,10 @@ class JobPolicy
     /**
      * Determine whether the user can view any models.
      */
-    // public function viewAny(User $user): bool
-    // {
-    //     //
-    // }
-
+    public function index(User $user): bool
+    {
+        return $user->role === 'company' || $user->role === 'admin';
+    }
 
     /**
      * Determine whether the user can create models.
@@ -41,7 +40,6 @@ class JobPolicy
                 || $user->role === 'admin';
     }
 
-
     /**
      * Determine whether the user can update the model.
      */
@@ -57,20 +55,4 @@ class JobPolicy
     {
         return ($user->role === 'company' && $user->id === $job->user_id) || $user->role === 'admin';
     }
-
-    // /**
-    //  * Determine whether the user can restore the model.
-    //  */
-    // public function restore(User $user, Job $job): bool
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Determine whether the user can permanently delete the model.
-    //  */
-    // public function forceDelete(User $user, Job $job): bool
-    // {
-    //     //
-    // }
 }

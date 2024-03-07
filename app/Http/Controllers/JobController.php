@@ -23,13 +23,16 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index()
     {
-        // if (!auth()->user()->can('jobs.index')) {
-        //     abort(403, 'Unauthorized action.');
-        // }
-        $jobs = Job::where('user_id', auth()->user()->id)->get();
-        // $jobs = Job::all();
+        if (!auth()->user()->can('index', Job::class)) {
+            abort(403, 'Unauthorized action.');
+        }
+        if(auth()->user()->role === 'admin'){
+            $jobs = Job::all();
+        } else {
+            $jobs = Job::where('user_id', auth()->user()->id)->get();
+        }
         return view('jobs.index', compact('jobs'));
     }
 
@@ -226,9 +229,6 @@ class JobController extends Controller
 
     public function viewActiveJobs() 
     {
-        // if (!auth()->user()->can('jobs.index')) {
-        //     abort(403, 'Unauthorized action.');
-        // }
         $jobs = Job::where('status', '=', 'active')->get();
         return view('jobs.index', compact('jobs'));
     }

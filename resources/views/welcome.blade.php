@@ -48,11 +48,7 @@
                                     <td>{{ $job->company->name }}</td>
                                     <td>{{ $job->title }}</td>
                                     <td>{{ $job->post }}</td>
-                                    @if ($job->status === 'approved')
-                                        <td class="text-success">{{ $job->status }}</td>
-                                    @else
-                                        <td class="text-danger">{{ $job->status }}</td>
-                                    @endif
+									<td class="text-success">{{ $job->status }}</td>
                                     <td>{{ $job->salary_min }} - {{ $job->salary_max }}</td>
                                     <td>{{ $job->vacancy }}</td>
                                     <td>
